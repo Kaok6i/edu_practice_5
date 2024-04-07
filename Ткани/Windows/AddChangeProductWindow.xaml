@@ -1,0 +1,78 @@
+﻿<Window x:Class="Ткани.Windows.AddChangeProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ткани.Windows"
+        mc:Ignorable="d"
+                Title="Ткани | Добавление/редактирование продукта" Height="780" Width="400"
+        WindowStartupLocation="CenterScreen"
+        MaxHeight="800" MaxWidth="450" MinHeight="780" MinWidth="400" Icon="Resources/icon.ico"
+        FontFamily="Comic Sans MS" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel>
+                <TextBlock Text="Артикул" Margin="10 5 0 0" FontSize="15"/>
+                <TextBox x:Name="tbArticle" Margin="10 5 10 0" Height="25"
+                        Text="{Binding ArticleNumber}"/>
+
+                <TextBlock Text="Название" Margin="10 10 0 0" FontSize="15"/>
+                <TextBox x:Name="tbName" Margin="10 5 10 0" Height="25"
+                          Text="{Binding Name}"/>
+
+                <TextBlock Text="Описание" Margin="10 10 0 0" FontSize="15"/>
+                <TextBox x:Name="tbDescription" Margin="10 5 10 0" Height="25"
+                Text="{Binding Description}"/>
+
+                <TextBlock Text="Категория ткани" Margin="10 10 0 0" FontSize="15"/>
+                <ComboBox x:Name="cbCategory" Margin="10 5 10 0" Height="25" 
+                           Text="{Binding Category.CategoryProduct}"/>
+
+                <TextBlock Text="Пролизводитель" Margin="10 10 0 0" FontSize="15"/>
+                <ComboBox x:Name="cbManufacturer" Margin="10 5 10 0" Height="25" 
+                          Text="{Binding Manufacturer.Name}"/>
+
+                <TextBlock Text="Цена" Margin="10 10 0 0" FontSize="15"/>
+                <TextBox x:Name="tbCost" Margin="10 5 10 0" Height="25"
+                        Text="{Binding Description}"/>
+
+                <TextBlock Text="Скидка" Margin="10 10 0 0" FontSize="15"/>
+                <TextBox x:Name="tbDiscount" Margin="10 5 10 0" Height="25"
+                        Text="{Binding DiscountAmount}"/>
+
+                <TextBlock Text="Количество на складе" Margin="10 10 0 0" FontSize="15"/>
+                <TextBox x:Name="tbQuantityInStock" Margin="10 5 10 0" Height="25"
+                        Text="{Binding QuantityInStock}"/>
+
+                <TextBlock Text="Единица измерения" Margin="10 10 0 0" FontSize="15"/>
+                <ComboBox x:Name="cbUnitOfMeasurement" Margin="10 5 10 0" Height="25"
+                        Text="{Binding UnitOfMeasurement.UnitOfMeasurement}"/>
+
+                <TextBlock Text="Максимальная скидка" Margin="10 10 0 0" FontSize="15"/>
+                <TextBox x:Name="tbMaxDiscount" Margin="10 5 10 0" Height="25"
+                            Text="{Binding MaximumDiscount}"/>
+
+                <TextBlock Text="Поставщик" Margin="10 10 0 0" FontSize="15"/>
+                <ComboBox x:Name="cbSupplier" Margin="10 5 10 0" Height="25" 
+                         Text="{Binding Supplier.Suppliers}"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="saveBttn" Width="180" Height="30" Margin="5 0 10 0"
+                   Content="Сохранить" FontSize="15" Click="saveBttn_Click"
+                   Background="#FF349C3D" BorderBrush="#FF349C3D"/>
+
+                <Button x:Name="Exit" Width="180" Height="30" Margin="0 0 0 0"
+                    Content="Отмена" FontSize="15" Click="Exit_Click" 
+                        Background="#FF349C3D" BorderBrush="#FF349C3D"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

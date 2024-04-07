@@ -1,0 +1,143 @@
+﻿<Window x:Class="Ткани.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ткани"
+        mc:Ignorable="d"
+         Title="Ткани | Окно администратора" Height="450" Width="800" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="Resources\icon.ico" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+        <RowDefinition Height="80"/>
+        <RowDefinition/>
+        <RowDefinition Height="50"/>
+    </Grid.RowDefinitions>
+        <TextBlock x:Name="fioTB" FontFamily="Comic Sans MS" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Фильтрация" FontFamily="Comic Sans MS" FontSize="15" Width="150" Height="30" 
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="10 10 0 0"/>
+
+        <ComboBox x:Name="cbFiltering" Width="150" Height="30" HorizontalAlignment="Left"
+               VerticalAlignment="Center" Margin="10 25 0 0"
+               SelectionChanged="cbFiltering_SelectionChanged" 
+               ItemsSource="{Binding Manufacturer.Name}"/>
+
+            <TextBlock Text="Сортировка" FontFamily="Comic Sans MS" FontSize="15" Width="150" Height="30" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top"
+                 Margin="250 10 0 0"/>
+
+        <ComboBox x:Name="cbSorting" Width="150" Height="30" HorizontalAlignment="Left"
+                VerticalAlignment="Center" Margin="250 25 0 0"
+               SelectionChanged="cbSorting_SelectionChanged">
+            <ComboBoxItem Content="Все"/>
+            <ComboBoxItem Content="От Давних к Ранним"/>
+            <ComboBoxItem Content="От Ранних к Давним"/>
+        </ComboBox>
+
+            <TextBlock FontFamily="Comic Sans MS" Text="Поиск" FontSize="15" Width="150" Height="30" 
+                       HorizontalAlignment="Left" VerticalAlignment="Top"
+                       Margin="450 10 0 0"/>
+
+        <TextBox x:Name="tbSearch" FontSize="15" Width="200" Height="30" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="450 25 0 0" SelectionChanged="Search_SelectionChanged"/>
+
+        <Button x:Name="backButton" HorizontalAlignment="Right" Width="100" Height="30" BorderBrush="#FF349C3D" Click="backButton_Click" Content="НАЗАД" Background="#FF349C3D" FontFamily="Comic Sans MS" FontSize="20" FontWeight="Bold" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="30"/>
+                    </Style>
+                </Button.Resources>
+            </Button> 
+    </Grid>
+
+    <Grid Grid.Row="1" Background="#FF92D050">
+        <ListView x:Name="BaseProduct" VerticalAlignment="Bottom"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"  FontFamily="Comic Sans MS"
+                      ItemsSource="{Binding Product}" Margin="10 0 10 0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+
+                            <Border BorderThickness="1" BorderBrush="Black" Grid.Column="0" >
+                                <Image Width="100" Height="100" Grid.Column="0" 
+                             Source="{Binding Photo}" HorizontalAlignment="Left"
+                             Margin="5 0 0 0"/>
+                            </Border>
+
+                            <TextBlock x:Name="tbName" TextWrapping="Wrap" TextAlignment="Left" 
+                 HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1"
+                 Text="{Binding Name}" Margin="0 0 0 0" FontSize="15" FontWeight="Bold"/>
+
+                            <TextBlock x:Name="tbDescription" TextAlignment="Justify" 
+                 HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1"
+                 Text="{Binding Description}" Margin="0 20 0 0" FontSize="15"/>
+
+                            <TextBlock  TextWrapping="Wrap" TextAlignment="Center" 
+                 HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"
+                 Text="Производитель:" Margin="0 40 0 0" FontSize="15"/>
+
+                            <TextBlock x:Name="tbTime" TextWrapping="Wrap" TextAlignment="Center" 
+                 HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1"
+                 Text="{Binding Manufacturer.Name}"  Margin="0 40 0 0" FontSize="15"/>
+
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"
+                Text="Цена:" Margin="0 60 0 0" FontSize="15"/>
+
+                            <TextBlock x:Name="tbCost" TextWrapping="Wrap" TextAlignment="Center" 
+                 HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1"
+                 Text="{Binding Cost}" Margin="50 60 0 0" FontSize="15"/>
+
+                            <TextBlock  TextAlignment="Center" 
+                HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Center"
+                Text="Наличие на скалде" Margin="0 10 0 0" FontSize="15"/>
+
+                            <TextBlock x:Name="tbQuantityInStock" TextAlignment="Center" 
+                HorizontalAlignment="Center" Grid.Column="2" VerticalAlignment="Bottom"
+                Text="{Binding QuantityInStock}" Margin="0 10 0 0" FontSize="15"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+    <Grid Grid.Row="2">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button FontFamily="Comic Sans MS" x:Name="Add" Width="150" Height="30" Content="Добавление" Click="Add_Click" 
+HorizontalAlignment="Right" Margin="0 5 10 0" VerticalAlignment="Top"
+Background="White" BorderBrush="#FF349C3D"/>
+
+                <Button FontFamily="Comic Sans MS" x:Name="Edit" Width="150" Height="30" Content="Редактирование" Click="Edit_Click" 
+HorizontalAlignment="Right" Margin="0 5 10 0" VerticalAlignment="Top"
+Background="White" BorderBrush="#FF349C3D"/>
+
+                <Button FontFamily="Comic Sans MS" x:Name="Delete" Width="150" Height="30" Content="Удалить" Click="Delete_Click" 
+        HorizontalAlignment="Right" Margin="0 5 10 0" VerticalAlignment="Top"
+        Background="White" BorderBrush="#FF349C3D"/>
+        </StackPanel>
+    </Grid>
+    </Grid>
+</Window>
+
